@@ -1,11 +1,19 @@
-name: 'Your name here'
-description: 'Provide a description here'
-author: 'Your name or organization here'
+name: 'Get Vercel Deployment Url'
+description: 'Get the latest deployment url for a specific commit'
+author: 'Tanner B. Hess Webber'
 inputs:
-  milliseconds: # change this
+  commit_hash:
+    required: false
+    description: 'The commit hash for which the deployment URL should be extracted'
+  vercel_access_token:
     required: true
-    description: 'input description here'
-    default: 'default value if applicable'
+    description: 'The Vercel access token to use for authentication'
+  vercel_team_id:
+    required: false
+    description: 'The Vercel team id to use as the context for the request'
+  vercel_project_id:
+    required: false
+    description: 'The Vercel project id to use to narrow the scope'
 runs:
   using: 'node16'
   main: 'dist/index.js'
