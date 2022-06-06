@@ -5,6 +5,7 @@ inputs:
   commit_hash:
     required: false
     description: 'The commit hash for which the deployment URL should be extracted'
+    default: ${{ github.sha }}
   vercel_access_token:
     required: true
     description: 'The Vercel access token to use for authentication'

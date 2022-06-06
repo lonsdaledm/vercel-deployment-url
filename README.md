@@ -1,46 +1,47 @@
-<p align="center">
-  <a href="https://github.com/actions/typescript-action/actions"><img alt="typescript-action status" src="https://github.com/actions/typescript-action/workflows/build-test/badge.svg"></a>
-</p>
+# Vercel Deployment Url Action
 
-# Create a JavaScript Action using TypeScript
+Get the url for a deployment that is associated with a specific commit.
 
-Use this template to bootstrap the creation of a TypeScript action.:rocket:
+## Docs
 
-This template includes compilation support, tests, a validation workflow, publishing, and versioning guidance.  
+### Inputs
 
-If you are new, there's also a simpler introduction.  See the [Hello World JavaScript Action](https://github.com/actions/hello-world-javascript-action)
+| name                  | required | description                                                                                                                                                                                             |
+| --------------------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `commit_hash`         | false    | The commit hash for which the deployment URL should be extracted.  Defaults to the latest commit on a branch.                                                                                           |
+| `vercel_access_token` | true     | The Vercel access token to use for authentication                                                                                                                                                       |
+| `vercel_team_id`      | false    | The Vercel team id to use as the context for the request. This is **required** if you want to scope your request to a team.                                                                             |
+| `vercel_project_id`   | false    | The Vercel project id to use to narrow the scope of the search. This can speed up the search, but shouldn't make a significant difference unless you're going fairly far back in the deployment history |
 
-## Create an action from this template
+### Outputs
 
-Click the `Use this Template` and provide the new repo details for your action
+| name             | description                        |
+| ---------------- | ---------------------------------- |
+| `deployment_url` | The full qualified url from Vercel |
 
-## Code in Main
+## Contributing
 
-> First, you'll need to have a reasonably modern version of `node` handy. This won't work with versions older than 9, for instance.
+### Commands
 
-Install the dependencies  
+#### Build
+
+Build the typescript and package it for distribution:
+
 ```bash
-$ npm install
+npm package
 ```
 
-Build the typescript and package it for distribution
-```bash
-$ npm run build && npm run package
-```
+#### Test
+
+_We currently don't have any tests in place for this action, but would love to in the future._
 
 Run the tests :heavy_check_mark:  
+
 ```bash
-$ npm test
-
- PASS  ./index.test.js
-  ✓ throws invalid number (3ms)
-  ✓ wait 500 ms (504ms)
-  ✓ test runs (95ms)
-
-...
+npm test
 ```
 
-## Change action.yml
+## Changing `./action.yml`
 
 The action.yml defines the inputs and output for your action.
 
@@ -48,7 +49,7 @@ Update the action.yml with your name, description, inputs and outputs for your a
 
 See the [documentation](https://help.github.com/en/articles/metadata-syntax-for-github-actions)
 
-## Change the Code
+## Changing the Code
 
 Most toolkit and CI/CD operations involve async operations so the action is run in an async function.
 
@@ -70,21 +71,20 @@ run()
 
 See the [toolkit documentation](https://github.com/actions/toolkit/blob/master/README.md#packages) for the various packages.
 
-## Publish to a distribution branch
+### Publishing
 
-Actions are run from GitHub repos so we will checkin the packed dist folder. 
+Actions are run from GitHub repos so we will checkin the packed dist folder.
 
 Then run [ncc](https://github.com/zeit/ncc) and push the results:
+
 ```bash
-$ npm run package
-$ git add dist
-$ git commit -a -m "prod dependencies"
-$ git push origin releases/v1
+npm run package
+git add dist
+git commit -a -m "prod dependencies"
+git push origin releases/v1
 ```
 
-Note: We recommend using the `--license` option for ncc, which will create a license file for all of the production node modules used in your project.
-
-Your action is now published! :rocket: 
+Your action is now published! :rocket:
 
 See the [versioning documentation](https://github.com/actions/toolkit/blob/master/docs/action-versioning.md)
 
@@ -99,7 +99,3 @@ with:
 ```
 
 See the [actions tab](https://github.com/actions/typescript-action/actions) for runs of this action! :rocket:
-
-## Usage:
-
-After testing you can [create a v1 tag](https://github.com/actions/toolkit/blob/master/docs/action-versioning.md) to reference the stable and latest V1 action
